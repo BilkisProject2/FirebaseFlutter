@@ -19,43 +19,55 @@ class _AddPostScreenState
 
   bool loading = false;
 
-  Future<void> addPost() async {
+Future<void> addPost() async {
+  if (postController.text.trim().isEmpty) {
+    Utils().toastMessage("Enter Post");
+    return;
+  }
 
-    if (postController.text.trim().isEmpty) {
+  setState(() {
+    loading = true;
+  });
 
-      Utils().toastMessage("Enter Post");
+  try {
+    await ref
+        .read(realtimeRepositoryProvider)
+        .addPost(postController.text.trim());
 
-      return;
-    }
-
-    setState(() {
-      loading = true;
-    });
-
-    try {
-
-      await ref
-          .read(realtimeRepositoryProvider)
-          .addPost(postController.text);
-
-      Utils().toastMessage("Post Added");
-
-      Navigator.pop(context);
-
-    } catch (e) {
-
-      Utils().toastMessage(e.toString());
-
-    }
+    if (!mounted) return;
 
     setState(() {
       loading = false;
     });
 
+    Utils().toastMessage("Post Added");
+
+    debugPrint("🔥 BEFORE POP");
+    debugPrint("🔥 CAN POP = ${Navigator.canPop(context)}");
+
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context);
+    }
+
+    debugPrint("🔥 AFTER POP");
+  } catch (e, stackTrace) {
+    if (!mounted) return;
+
+    setState(() {
+      loading = false;
+    });
+
+    debugPrint("❌ ADD POST ERROR: $e");
+    debugPrint("❌ STACK: $stackTrace");
+
+    Utils().toastMessage(e.toString());
   }
+}
 
   @override
   Widget build(BuildContext context) {
+print("🔥🔥 ADD POST BUILD");
+  print("🔥🔥 CAN POP IN ADD SCREEN = ${Navigator.of(context).canPop()}");
 
     return Scaffold(
 

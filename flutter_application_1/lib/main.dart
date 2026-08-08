@@ -7,11 +7,17 @@ import 'firebase_options.dart';
 
 
 void main() async {
+  print("🔥🔥🔥 MAIN STARTED 🔥🔥🔥");
+
   WidgetsFlutterBinding.ensureInitialized();
+
+  print("🔥🔥🔥 BEFORE FIREBASE 🔥🔥🔥");
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  print("🔥🔥🔥 FIREBASE INITIALIZED 🔥🔥🔥");
 
   runApp(
     const ProviderScope(

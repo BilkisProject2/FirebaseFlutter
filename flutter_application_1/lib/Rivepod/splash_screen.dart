@@ -2,6 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Rivepod/loginpart/Provider/authRepositoryProvider.dart';
+import 'package:flutter_application_1/Rivepod/loginpart/screen/LoginScreen.dart';
+import 'package:flutter_application_1/Rivepod/screen/firestorelistscreen.dart';
+import 'package:flutter_application_1/Rivepod/screen/realtimescreen/AddPostScreen.dart';
+import 'package:flutter_application_1/Rivepod/screen/realtimescreen/post_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Firestore/firestore_list_screen.dart';
@@ -25,6 +29,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   void checkLogin() {
 
+
+
     final repo = ref.read(authRepositoryProvider);
 
     Timer(const Duration(seconds: 3), () {
@@ -34,7 +40,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (_) => const FirestoreListScreen(),
+            builder: (_) => const  PostScreen(),
           ),
         );
 

@@ -4,7 +4,7 @@ import 'package:flutter_application_1/Rivepod/loginpart/Provider/authRepositoryP
 import 'package:flutter_application_1/Rivepod/loginpart/screen/ForgotPassword.dart';
 import 'package:flutter_application_1/Rivepod/loginpart/screen/SignupScreen.dart';
 import 'package:flutter_application_1/Rivepod/screen/realtimescreen/post_screen.dart';
-import 'package:flutter_application_1/auth/login_with_phonenuber.dart';
+import 'package:flutter_application_1/Rivepod/loginpart/screen/login_with_phonenuber.dart';
 import 'package:flutter_application_1/ui/Utils/utils.dart';
 import 'package:flutter_application_1/widgets/RoundButton.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

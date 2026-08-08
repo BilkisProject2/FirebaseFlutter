@@ -32,8 +32,10 @@ class _PostScreenState extends ConsumerState<PostScreen> {
 
   @override
   Widget build(BuildContext context) {
+     print("🔥🔥🔥 POST SCREEN BUILD 🔥🔥🔥");
     final postAsync = ref.watch(realtimePostProvider);
-
+ print("🔥 ADD POST SCREEN BUILD");
+  print("🔥 ADD SCREEN CAN POP = ${Navigator.of(context).canPop()}");
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -63,18 +65,21 @@ class _PostScreenState extends ConsumerState<PostScreen> {
         ],
       ),
 
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => const AddPostScreen(),
-            ),
-          );
+ floatingActionButton: FloatingActionButton(
+  onPressed: () {
+    print("🔥🔥 PLUS BUTTON PRESSED");
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (newContext) {
+          print("🔥🔥 ADD POST ROUTE CREATED");
+          return const AddPostScreen();
         },
       ),
-
+    );
+  },
+  child: const Icon(Icons.add),
+),
       body: Column(
         children: [
 
@@ -108,10 +113,20 @@ class _PostScreenState extends ConsumerState<PostScreen> {
               },
 
               error: (error, stackTrace) {
-                return Center(
-                  child: Text(error.toString()),
-                );
-              },
+
+  debugPrint("❌ PROVIDER ERROR: $error");
+  debugPrint("❌ PROVIDER STACK: $stackTrace");
+
+  return Center(
+    child: Text(
+      "ERROR:\n$error",
+      style: const TextStyle(
+        color: Colors.red,
+        fontSize: 18,
+      ),
+    ),
+  );
+},
 
               data: (posts) {
 
